@@ -14,6 +14,11 @@ protocol CheckoutPaymentFieldDelegate: class {
 }
 
 class CardPaymentFieldManager: NSObject, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+
+    private enum Constants {
+        static let bundle = Bundle(identifier: "org.cocoapods.Adyen")
+        static let fieldTextColor = UIColor(named: "cardFieldsTextColor", in: bundle, compatibleWith: nil)
+    }
     
     // MARK: - Object Lifecycle
     
@@ -37,7 +42,7 @@ class CardPaymentFieldManager: NSObject, UITextFieldDelegate, UIPickerViewDelega
     // MARK: - UITextFieldDelegate
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.textColor = UIColor.darkText
+        textField.textColor = Constants.fieldTextColor
         delegate?.paymentFieldDidUpdateActive(field: textField)
     }
     
@@ -152,7 +157,7 @@ class CardPaymentFieldManager: NSObject, UITextFieldDelegate, UIPickerViewDelega
     private var expirationField: CardExpirationField
     private var cvcField: CardCvcField
     private var acceptedCards: [CardType]
-    private let validTextColor = UIColor.darkText
+    private let validTextColor = Constants.fieldTextColor
     private let invalidTextColor = UIColor.red
     private var installmentValues: [InputSelectItem] = []
     

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -46,10 +45,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="41S-pR-hlw" userLabel="Content View">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="293.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="293"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="O2c-il-bea">
-                                    <rect key="frame" x="0.0" y="20" width="375" height="253.5"/>
+                                    <rect key="frame" x="0.0" y="20" width="375" height="253"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LpG-E3-gUw" userLabel="Top Line">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="0.5"/>
@@ -89,7 +88,6 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="22" id="Qp7-je-XGP"/>
                                                     </constraints>
-                                                    <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <userDefinedRuntimeAttributes>
@@ -101,7 +99,7 @@
                                                     </connections>
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y75-jO-jE0" userLabel="Card Line">
-                                                    <rect key="frame" x="20" y="69" width="335" height="1"/>
+                                                    <rect key="frame" x="20" y="69.5" width="335" height="0.5"/>
                                                     <color key="backgroundColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="0.5" id="CNA-6n-LPt"/>
@@ -123,7 +121,7 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="y75-jO-jE0" firstAttribute="leading" secondItem="X5i-Kz-kd2" secondAttribute="leading" constant="20" id="6bJ-Eh-EMd"/>
                                                 <constraint firstAttribute="height" constant="70" id="EY6-3a-rn3"/>
@@ -164,7 +162,6 @@
                                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="MM/YY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XBa-JS-Lok" customClass="CardExpirationField" customModule="Adyen">
                                                                     <rect key="frame" x="0.0" y="20" width="137.5" height="22"/>
                                                                     <accessibility key="accessibilityConfiguration" identifier="expiry-field"/>
-                                                                    <nil key="textColor"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                                     <userDefinedRuntimeAttributes>
@@ -176,14 +173,14 @@
                                                                     </connections>
                                                                 </textField>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gSJ-Ma-VkV" userLabel="Card Line">
-                                                                    <rect key="frame" x="0.0" y="48" width="137.5" height="0.0"/>
+                                                                    <rect key="frame" x="0.0" y="47.5" width="137.5" height="0.5"/>
                                                                     <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="0.5" id="P6t-SZ-Zga"/>
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>
-                                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstItem="XBa-JS-Lok" firstAttribute="leading" secondItem="qMC-IG-VAo" secondAttribute="leading" id="GmC-Z4-3cO"/>
                                                                 <constraint firstItem="ma2-sR-S0K" firstAttribute="top" secondItem="qMC-IG-VAo" secondAttribute="top" id="Roh-yu-2mi"/>
@@ -213,7 +210,6 @@
                                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="123" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GOT-nC-YyR" customClass="CardCvcField" customModule="Adyen">
                                                                     <rect key="frame" x="0.0" y="20" width="137.5" height="22"/>
                                                                     <accessibility key="accessibilityConfiguration" identifier="cvc-field"/>
-                                                                    <nil key="textColor"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                                     <userDefinedRuntimeAttributes>
@@ -225,14 +221,14 @@
                                                                     </connections>
                                                                 </textField>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DdM-5m-a0l" userLabel="Card Line">
-                                                                    <rect key="frame" x="0.0" y="47" width="137.5" height="1"/>
+                                                                    <rect key="frame" x="0.0" y="47.5" width="137.5" height="0.5"/>
                                                                     <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="0.5" id="v0q-8A-sjd"/>
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>
-                                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstItem="GOT-nC-YyR" firstAttribute="leading" secondItem="7BH-3l-xk9" secondAttribute="leading" id="12Z-Xb-vHD"/>
                                                                 <constraint firstItem="53s-L6-3Ot" firstAttribute="leading" secondItem="7BH-3l-xk9" secondAttribute="leading" id="3OS-wg-MAa"/>
@@ -251,7 +247,7 @@
                                                     </constraints>
                                                 </stackView>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="70" id="Ftv-Z6-kUQ"/>
                                                 <constraint firstItem="MkA-eu-hIi" firstAttribute="leading" secondItem="h0E-yp-zyf" secondAttribute="leading" constant="20" id="I6K-ER-ZKA"/>
@@ -283,7 +279,6 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="22" id="f1K-YS-koC"/>
                                                     </constraints>
-                                                    <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <userDefinedRuntimeAttributes>
@@ -291,14 +286,14 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ns7-60-5hC" userLabel="Instalment Line">
-                                                    <rect key="frame" x="20" y="51" width="335" height="1"/>
+                                                    <rect key="frame" x="20" y="51.5" width="335" height="0.5"/>
                                                     <color key="backgroundColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="0.5" id="31J-1z-CEF"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="ns7-60-5hC" secondAttribute="bottom" id="5IE-ba-1DB"/>
                                                 <constraint firstItem="QRu-RY-VvZ" firstAttribute="leading" secondItem="Bho-gk-Hhe" secondAttribute="leading" constant="20" id="6Xa-7X-6vR"/>
@@ -346,7 +341,7 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="Dug-er-7SQ" firstAttribute="trailing" secondItem="u8P-Qu-n78" secondAttribute="leading" id="FVT-bv-KzE"/>
                                                 <constraint firstAttribute="height" priority="999" constant="60" id="P02-0m-RgY"/>
@@ -358,13 +353,13 @@
                                         </view>
                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JzO-nS-hHw" userLabel="Store Details Placeholder View">
                                             <rect key="frame" x="0.0" y="252.5" width="375" height="20"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="c38-1P-gpv"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qG3-FO-bl5" userLabel="Bottom Line">
-                                            <rect key="frame" x="0.0" y="252.5" width="375" height="1"/>
+                                            <rect key="frame" x="0.0" y="252.5" width="375" height="0.5"/>
                                             <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="0.5" id="mRU-ES-Fjz"/>
@@ -394,7 +389,7 @@
                     </constraints>
                 </scrollView>
             </subviews>
-            <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" name="background"/>
             <constraints>
                 <constraint firstItem="AX1-bC-owh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="8dK-4R-GSK"/>
                 <constraint firstItem="AX1-bC-owh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Kbw-OM-iBT"/>
@@ -409,5 +404,8 @@
         <image name="checkbox_active" width="20" height="20"/>
         <image name="checkbox_inactive" width="20" height="20"/>
         <image name="credit_card_icon" width="29" height="19"/>
+        <namedColor name="background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

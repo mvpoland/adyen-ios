@@ -1,20 +1,18 @@
 disabled_rules:
-  - cyclomatic_complexity
-  - line_length
   - trailing_whitespace
-  - operator_whitespace
-  - unused_closure_parameter
+  - nesting
   - todo
-  - fallthrough
 
-  #Review:
-  - large_tuple
-  - function_body_length
-  - file_length
-included:
-  - Adyen
+opt_in_rules:
+  - explicit_acl
+
+excluded:
   - AdyenTests
   - AdyenUITests
-  - AdyenUIHost
-excluded:
-  - Pods
+  - Examples
+  - Internal
+
+line_length:
+  ignores_function_declarations: true
+  ignores_urls: true
+  warning: 140

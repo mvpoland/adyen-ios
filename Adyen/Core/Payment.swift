@@ -1,56 +1,64 @@
 //
-// Copyright (c) 2018 Adyen B.V.
+// Copyright (c) 2020 Adyen N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
 import Foundation
 
-/// An object that represents a payment that has been completed by the user. The result of the payment can be retrieved via the `status` property.
-public final class Payment {
+/// Describes the current payment.
+public struct Payment {
     
-    // MARK: - Initializing
-    
-    internal init(status: PaymentStatus, method: PaymentMethod, payload: String, paymentSetup: PaymentSetup) {
-        self.status = status
-        self.method = method
-        self.payload = payload
-        self.amount = paymentSetup.amount
-        self.currencyCode = paymentSetup.currencyCode
-        self.merchantReference = paymentSetup.merchantReference
-        self.shopperReference = paymentSetup.shopperReference
-        self.shopperCountryCode = paymentSetup.countryCode
-        self.shopperLocaleIdentifier = paymentSetup.shopperLocaleIdentifier
+    /// Describes the amount of a payment.
+    public struct Amount {
+        
+        /// The value of the amount in minor units.
+        public var value: Int
+        
+        /// The code of the currency in which the amount's value is specified.
+        public var currencyCode: String
+        
+        /// Initializes an Amount.
+        ///
+        /// - Parameters:
+        ///   - value: The value in minor units.
+        ///   - currencyCode: The code of the currency.
+        public init(value: Int, currencyCode: String) {
+            self.value = value
+            self.currencyCode = currencyCode
+        }
+        
     }
     
-    // MARK: - Accessing the Status of Completed Payment
+    /// The amount for this payment.
+    public var amount: Amount
     
-    /// The status of the payment.
-    public let status: PaymentStatus
+    /// The code of the country in which the payment is made.
+    public var countryCode: String?
     
-    // MARK: - Accessing the Info Used to Complete Payment
+    /// Initializes a payment.
+    ///
+    /// - Parameters:
+    ///   - amount: The amount for this payment.
+    ///   - countryCode: The code of the country in which the payment is made.
+    public init(amount: Amount, countryCode: String? = nil) {
+        self.amount = amount
+        self.countryCode = countryCode
+    }
+}
+
+/// :nodoc:
+public extension Payment.Amount {
     
-    /// The method that was used to complete the payment.
-    public let method: PaymentMethod
+    /// Returns a formatter representation of the amount.
+    ///
+    /// :nodoc:
+    var formatted: String {
+        guard let formattedAmount = AmountFormatter.formatted(amount: value, currencyCode: currencyCode) else {
+            return String(value) + " " + currencyCode
+        }
+        
+        return formattedAmount
+    }
     
-    /// The payload as returned from the server.
-    public let payload: String
-    
-    /// The amount of the payment, in minor units.
-    public let amount: Int
-    
-    /// The code of the currency for the payment amount.
-    public let currencyCode: String
-    
-    /// The reference of the merchant.
-    public let merchantReference: String
-    
-    /// The reference of the shopper.
-    public let shopperReference: String?
-    
-    /// The country code of the shopper.
-    public let shopperCountryCode: String
-    
-    /// The locale identifier of the shopper.
-    public let shopperLocaleIdentifier: String?
 }

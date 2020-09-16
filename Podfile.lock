@@ -1,0 +1,24 @@
+PODS:
+  - AdyenCSE (1.1.1)
+  - SwiftFormat/CLI (0.28.6)
+  - SwiftLint (0.25.1)
+
+DEPENDENCIES:
+  - AdyenCSE (~> 1.1)
+  - SwiftFormat/CLI (~> 0.28.6)
+  - SwiftLint (~> 0.25.0)
+
+SPEC REPOS:
+  trunk:
+    - AdyenCSE
+    - SwiftFormat
+    - SwiftLint
+
+SPEC CHECKSUMS:
+  AdyenCSE: c52eb5ef89bd98b8d0aa1214352fe026979ace1a
+  SwiftFormat: 9acb099fdbb44d4ca83e031361b1e3c701cd25ed
+  SwiftLint: ce933681be10c3266e82576dad676fa815a602e9
+
+PODFILE CHECKSUM: 54d6933b4d12fa569800a99ca676fa1089867203
+
+COCOAPODS: 1.8.4

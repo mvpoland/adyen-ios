@@ -1,11 +1,9 @@
-version = `agvtool vers -terse`
-
 Pod::Spec.new do |s|
   s.name = 'Adyen'
-  s.version = version
-  s.summary = "Adyen SDK for iOS"
+  s.version = '3.4.1'
+  s.summary = "Adyen Components for iOS"
   s.description = <<-DESC
-    With Adyen SDK you can dynamically list all relevant payment methods for a specific transaction, so your shoppers can always pay with the method of their choice. The methods are listed based on the shopper's country, the transaction currency and amount.
+    Adyen Components for iOS allows you to accept in-app payments by providing you with the building blocks you need to create a checkout experience.
   DESC
 
   s.homepage = 'https://adyen.com'
@@ -13,67 +11,43 @@ Pod::Spec.new do |s|
   s.author = { 'Adyen' => 'support@adyen.com' }
   s.source = { :git => 'https://github.com/Adyen/adyen-ios.git', :tag => "#{s.version}" }
   s.platform = :ios
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '10.0'
+  s.swift_version = '5.0'
   s.frameworks = 'Foundation'
-
-  s.default_subspecs = 'Core', 'Cards', 'Ideal', 'SEPADirectDebit', 'UI'
+  s.default_subspecs = 'Core', 'Card', 'DropIn'
 
   s.subspec 'Core' do |plugin|
-    plugin.source_files = 'Adyen/Core/**/*.swift'
+    plugin.source_files = 'Adyen/**/*.swift'
+    plugin.resource_bundles = {
+        'Adyen' => [
+            'Adyen/Assets/**/*.strings'
+        ]
+    }
+  end
+
+  s.subspec 'DropIn' do |plugin|
+    plugin.source_files = 'AdyenDropIn/**/*.swift'
+    plugin.dependency 'Adyen/Core'
+    plugin.dependency 'Adyen/Card'
   end
 
   # Payment Methods
-  s.subspec 'ApplePay' do |plugin|
-    plugin.source_files = 'Adyen/Plugins/ApplePay/**/*.swift'
+  s.subspec 'WeChatPay' do |plugin|
+    plugin.source_files = 'AdyenWeChatPay/**/*.swift', 'AdyenWeChatPay/WeChatSDK/*.h'
+    plugin.private_header_files = 'AdyenWeChatPay/WeChatSDK/*.h'
+    plugin.vendored_libraries = 'AdyenWeChatPay/WeChatSDK/libWeChatSDK.a'
+    plugin.xcconfig = { 'SWIFT_INCLUDE_PATHS' => '${PODS_TARGET_SRCROOT}/AdyenWeChatPay/WeChatSDK', 'OTHER_LDFLAGS' => '-ObjC -all_load' }
+    plugin.preserve_paths = 'AdyenWeChatPay/WeChatSDK/module.modulemap'
     plugin.dependency 'Adyen/Core'
-    plugin.dependency 'Adyen/CoreUI'
+    plugin.libraries = 'z', 'stdc++', 'sqlite3.0'
+    plugin.frameworks = 'SystemConfiguration', 'CoreTelephony', 'CFNetwork', 'CoreGraphics', 'Security'
   end
 
-  s.subspec 'Cards' do |plugin|
+  s.subspec 'Card' do |plugin|
     plugin.dependency 'Adyen/Core'
-    plugin.dependency 'Adyen/CoreUI'
-    plugin.dependency 'AdyenCSE', '~> 1.1'
-    plugin.source_files = 'Adyen/Plugins/Cards/**/*.swift'
-    plugin.resource_bundles = {
-        'Cards' => [
-            'Adyen/Plugins/Cards/**/*.xib'
-        ]
-    }
+    plugin.dependency 'Adyen3DS2', '>= 2.1.0-rc.5'
+    plugin.source_files = 'AdyenCard/**/*.swift', 'AdyenCard/Utilities/AdyenCSE/*.{h,m}', 'AdyenCard/Utilities/*.{h,m}'
+    plugin.private_header_files = 'AdyenCard/Utilities/AdyenCSE/*.h'
   end
 
-  s.subspec 'Ideal' do |plugin|
-    plugin.source_files = 'Adyen/Plugins/Ideal/**/*.swift'
-    plugin.dependency 'Adyen/CoreUI'
-    plugin.dependency 'Adyen/Core'
-  end
-
-  s.subspec 'SEPADirectDebit' do |plugin|
-    plugin.source_files = 'Adyen/Plugins/SEPADirectDebit/**/*.swift'
-    plugin.dependency 'Adyen/Core'
-    plugin.dependency 'Adyen/CoreUI'
-  end
-
-  s.subspec 'MOLPay' do |plugin|
-    plugin.source_files = 'Adyen/Plugins/MOLPay/**/*.swift'
-    plugin.dependency 'Adyen/Core'
-    plugin.dependency 'Adyen/CoreUI'
-  end
-
-  # Internals
-  s.subspec 'UI' do |plugin|
-    plugin.source_files = 'Adyen/UI/**/*.swift'
-    plugin.dependency 'Adyen/Core'
-    plugin.dependency 'Adyen/CoreUI'
-  end
-
-  s.subspec 'CoreUI' do |plugin|
-    plugin.source_files = 'Adyen/CoreUI/**/*.swift'
-    plugin.resource_bundles = {
-        'CoreUI' => [
-            'Adyen/CoreUI/Assets/Media.xcassets',
-            'Adyen/CoreUI/Assets/*.lproj/*.strings'
-        ]
-    }
-    plugin.dependency 'Adyen/Core'
-  end
 end

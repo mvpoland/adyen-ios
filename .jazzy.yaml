@@ -3,43 +3,139 @@ author: Adyen
 author_url: https://adyen.com
 github_url: https://github.com/Adyen/adyen-ios
 
-output: Docs
+readme: README.md
 
-theme: Docs/theme
+output: Docs
+theme: fullwidth
 skip_undocumented: false
 hide_documentation_coverage: true
 
 custom_categories:
-  - name: UI
+  - name: Drop In Component
     children:
-    - CheckoutViewController
-    - CheckoutViewControllerDelegate
-    - CheckoutViewControllerCardScanDelegate
-    - AppearanceConfiguration
-  - name: Payment
+      - DropInComponent
+      - DropInComponentDelegate
+      - DropInActionComponent
+  - name: Card Component
     children:
-    - Payment
-    - PaymentStatus
-  - name: Payment Request
+      - CardComponent
+      - CardDetails
+      - CardEncryptor
+      - CardType
+      - CardTypeDetector
+      - CardExpiryDateFormatter
+      - CardExpiryDateValidator
+      - CardSecurityCodeFormatter
+      - CardSecurityCodeValidator
+      - CardNumberFormatter
+      - CardNumberValidator
+  - name: Qiwi Wallet Component
     children:
-    - PaymentRequest
-    - PaymentRequestDelegate
-    - PaymentRequestResult
-    - Error
-  - name: Payment Method
+      - QiwiWalletComponent
+      - QiwiWalletDetails
+      - QiwiWalletPaymentMethod
+  - name: WeChat Pay
     children:
-    - PaymentMethod
-    - PaymentDetails
-    - InputDetail
-    - InputType
-    - InputSelectItem
-    - OneClickInfo
-    - CardOneClickInfo
-    - PayPalOneClickInfo
-  - name: Utilities
+      - WeChatPaySDKActionComponent
+      - WeChatPayPaymentMethod
+      - WeChatPaySDKAction
+      - WeChatPaySDKData
+  - name: 3D Secure 2 Component
     children:
-    - CardType
-    - CardValidator
-    - IBANSpecification
-    - IBANValidator
-    - IBANTextField
+      - ThreeDS2Component
+      - ThreeDS2ComponentError
+      - ThreeDS2Details
+  - name: Apple Pay Component
+    children:
+      - ApplePayComponent
+      - ApplePayDetails
+  - name: BCMC Component
+    children:
+      - BCMCComponent
+  - name: SEPA Direct Debit Component
+    children:
+      - SEPADirectDebitComponent
+      - SEPADirectDebitDetails
+      - IBANFormatter
+      - IBANValidator
+  - name: Issuer List Component
+    children:
+      - IssuerListComponent
+      - IssuerListDetails
+      - IdealComponent
+      - IdealDetails
+      - MOLPayComponent
+      - MOLPayDetails
+      - DotpayComponent
+      - DotpayDetails
+      - EPSComponent
+      - EPSDetails
+      - EntercashComponent
+      - EntercashDetails
+      - OpenBankingComponent
+      - OpenBankingDetails
+  - name: Redirect Component
+    children:
+      - RedirectComponent
+      - RedirectDetails
+  - name: Base Component
+    children:
+      - Component
+      - PaymentComponent
+      - PaymentComponentData
+      - PaymentComponentDelegate
+      - ActionComponent
+      - ActionComponentData
+      - ActionComponentDelegate
+      - PresentableComponent
+      - Details
+      - PaymentMethodDetails
+      - AdditionalDetails
+      - ComponentError
+  - name: Models
+    children:
+      - PaymentMethods
+      - PaymentMethod
+      - StoredPaymentMethod
+      - StoredCardPaymentMethod
+      - StoredBCMCPaymentMethod
+      - StoredPayPalPaymentMethod
+      - AnyCardPaymentMethod
+      - CardPaymentMethod
+      - IssuerListPaymentMethod
+      - ApplePayPaymentMethod
+      - BCMCPaymentMethod
+      - SEPADirectDebitPaymentMethod
+      - ShopperInteraction
+      - DisplayInformation
+      - Payment
+      - Action
+      - RedirectAction
+      - ThreeDS2FingerprintAction
+      - ThreeDS2ChallengeAction
+  - name: Styling
+    children:
+      - FormComponentStyle
+      - FormHeaderStyle
+      - FormFooterStyle
+      - FormTextItemStyle
+      - FormSwitchItemStyle
+      - ListComponentStyle
+      - ListSectionHeaderStyle
+      - ListItemStyle
+      - RedirectComponentStyle
+      - NavigationStyle
+      - ButtonStyle
+      - ImageStyle
+      - TextStyle
+      - ViewStyle
+  - name: Other
+    children:
+      - AdyenLogging
+      - Formatter
+      - Validator
+      - LengthValidator
+      - Environment
+      - LogoURLProvider
+      - Localizable
+      - LocalizationParameters

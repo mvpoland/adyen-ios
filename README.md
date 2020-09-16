@@ -1,79 +1,187 @@
-# Adyen SDK for iOS
+# Adyen Components for iOS
 
-With Adyen SDK you can help your shoppers pay with a payment method of their choice, selected from a dynamically generated list of available payment methods. Method availability is based on shoppers’ location, transaction currency, and transaction amount. 
+Adyen Components for iOS allows you to accept in-app payments by providing you with the building blocks you need to create a checkout experience.
 
-You can integrate the SDK in two ways: either make use of the default UI components and flows preconfigured by Adyen (Quick integration), or implement your own UI and checkout experience (Custom integration).
+<br/>
 
-![Credit Card](https://user-images.githubusercontent.com/8394738/31934915-b7a1805e-b8ad-11e7-9459-c29a0566e50b.gif)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-![One-Click](https://user-images.githubusercontent.com/8394738/31934916-b90bcf44-b8ad-11e7-842a-a29c39b1eb12.gif)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-![Apple Pay](https://user-images.githubusercontent.com/8394738/31934918-bb0007fc-b8ad-11e7-8e8c-84078b6b3221.gif)
+![DropIn preview](./dropin-ios.jpg)
+
+<br/>
 
 ## Installation
 
-Use CocoaPods to integrate the Adyen SDK into your project. For this, add the following line to your Podfile and run `pod install`.
+Adyen Components for iOS are available through either [CocoaPods](http://cocoapods.org) or [Carthage](https://github.com/Carthage/Carthage).
 
-```
-pod 'Adyen'
-```
+### CocoaPods
 
-## Quick integration
+1. Add `pod 'Adyen'` to your `Podfile`.
+2. Run `pod install`.
 
-If you want to quickly integrate with Adyen, use the default UI elements that we provide for selecting payment methods, entering payment details, and completing a payment.
+### Carthage
 
-For this, instantiate `CheckoutViewController`, present it in your app, and implement the `CheckoutViewControllerDelegate` protocol for callbacks. All UI interactions are handled by Adyen.
+1. Add `github "adyen/adyen-ios"` to your `Cartfile`.
+2. Run `carthage update`.
+3. Link the framework with your target as described in [Carthage Readme](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application).
 
-```swift
-let viewController = CheckoutViewController(delegate: self)
-present(viewController, animated: true)
-```
+## Drop-in
 
-The following `CheckoutViewControllerDelegate` methods should be implemented:
+The [Drop-in](https://adyen.github.io/adyen-ios/Docs/Classes/DropInComponent.html) handles the presentation of available payment methods and the subsequent entry of a customer's payment details. It is initialized with the response of [`/paymentMethods`][apiExplorer.paymentMethods], and provides everything you need to make an API call to [`/payments`][apiExplorer.payments] and [`/payments/details`][apiExplorer.paymentsDetails].
 
-```swift
-- checkoutViewController:requiresPaymentDataForToken:completion:
-```
+### Usage
 
-This method requires you to fetch payment data from your server and pass it to the `completion` handler. Upon receiving valid payment data, the SDK will present a list of available payment methods. 
+#### Presenting the Drop-in
 
-For your convenience, we provide a [demo server](https://checkoutshopper-test.adyen.com/checkoutshopper/demoserver/). You can find information on setting up your own server [here](https://docs.adyen.com/developers/checkout/implement-your-server).
+The Drop-in requires the response of the `/paymentMethods` endpoint to be initialized. To pass the response to Drop-in, decode the response to the `PaymentMethods` structure:
 
 ```swift
-- checkoutViewController:requiresReturnURL:
+let paymentMethods = try JSONDecoder().decode(PaymentMethods.self, from: response)
 ```
 
-This method will be called if a selected payment method requires user authentication outside of your app environment (in a web browser, native banking app, etc.). Upon payment authorisation, your app will be reopened using the `application(_:open:options:)` callback of `UIApplicationDelegate`. The URL used to open your app should be passed to the completion handler.
+Some payment methods need additional configuration. For example, to enable the card form, the Drop-in needs a public key to use for encryption. These payment method specific configuration parameters can be set in an instance of `DropInComponent.PaymentmethodsConfiguration`:
 
 ```swift
-- checkoutViewController:didFinishWith:
+let configuration = DropInComponent.PaymentMethodsConfiguration()
+configuration.card.publicKey = "..." // Your public key, retrieved from the Customer Area.
 ```
 
-This method will provide you with the result of the completed payment request (authorised, refused, etc.).
+After serializing the payment methods and creating the configuration, the Drop-in is ready to be initialized. Assign a `delegate` and use the `viewController` property to present the Drop-in on the screen:
 
-For implementation details, refer to the [Quick integration guide](https://docs.adyen.com/developers/checkout/ios/quick-integration-ios).
+```swift
+let dropInComponent = DropInComponent(paymentMethods: paymentMethods,
+paymentMethodsConfiguration: configuration)
+dropInComponent.delegate = self
+present(dropInComponent.viewController, animated: true)
+```
 
-## Custom integration
+#### Implementing DropInComponentDelegate
 
-With custom integration you will have full control over the payment flow and will be able to implement your own unique checkout experience. 
+To handle the results of the Drop-in, the following methods of `DropInComponentDelegate` should be implemented:
 
-This approach requires instantiating and starting a `PaymentRequest` and implementing the `PaymentRequestDelegate` protocol for callbacks. The `PaymentRequestDelegate` callbacks will provide you with a list of available payment methods, the URL for payment methods that require an external flow, and the result of payment processing.
+---
 
-For implementation details, refer to the [Custom integration guide](https://docs.adyen.com/developers/checkout/ios/custom-integration-ios).
+```swift
+func didSubmit(_ data: PaymentComponentData, from component: DropInComponent)
+```
 
-## Examples
+This method is invoked when the customer has selected a payment method and entered its payment details. The payment details can be read from `data.paymentMethod` and can be submitted as-is to `/payments`.
 
-You can find examples of both quick and custom integrations in the Examples folder of this repository.
+---
+
+```swift
+func didProvide(_ data: ActionComponentData, from component: DropInComponent)
+```
+
+This method is invoked when additional details are provided by the Drop-in after the first call to `/payments`. This happens, for example, during the 3D Secure 2 authentication flow or any redirect flow. The additional details can be retrieved from `data.details` and can be submitted to `/payments/details`.
+
+---
+
+```swift
+func didFail(with error: Error, from component: DropInComponent)
+```
+
+This method is invoked when an error occurred during the use of the Drop-in. Dismiss the Drop-in's view controller and display an error message.
+
+---
+
+#### Handling an action
+
+When `/payments` or `/payments/details` responds with a non-final result and an `action`, you can use the Drop-in to handle the action:
+
+```swift
+let action = try JSONDecoder().decode(Action.self, from: actionData)
+dropInComponent.handle(action)
+```
+
+In case the customer is redirected to an external URL, make sure to let the Drop-in know when the user returns to your app. Do this by implementing the following in your `UIApplicationDelegate`:
+
+```swift
+func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
+    Adyen.applicationDidOpen(url)
+
+    return true
+}
+```
+
+## Components
+
+In order to have more flexibility over the checkout flow, you can use our Components to present each payment method individually. Implementation details of our Components can be found in our [Components API Reference][reference].
+
+### Available Components
+
+- [Card Component][reference.cardComponent]
+- [3D Secure 2 Component][reference.threeDS2Component]
+- [Apple Pay Component][reference.applePayComponent]
+- [BCMC Component][reference.bcmcComponent]
+- [iDEAL Component][reference.issuerListComponent]
+- [SEPA Direct Debit Component][reference.sepaDirectDebitComponent]
+- [MOLPay Component][reference.issuerListComponent]
+- [Dotpay Component][reference.issuerListComponent]
+- [EPS Component][reference.issuerListComponent]
+- [Entercash Component][reference.issuerListComponent]
+- [Open Banking Component][reference.issuerListComponent]
+- [WeChat Pay Component][reference.weChatPaySDKActionComponent]
+- [Qiwi Wallet Component][reference.qiwiWalletComponent]
+- [Redirect Component][reference.redirectComponent]
+
+## Customization
+
+Both the Drop-in and the Components offer a number of customization options to allow you to match the appearance of your app.
+For example, to change the section header titles and form field titles in the Drop-in to red, and turn the submit button's background to blue:
+```swift
+var style = DropInComponent.Style()
+style.listComponent.sectionHeader.title.color = .red
+style.formComponent.textField.title.color = .red
+style.formComponent.footer.button.backgroundColor = .purple
+
+let dropInComponent = DropInComponent(paymentMethods: paymentMethods,
+                                      paymentMethodsConfiguration: configuration,
+                                      style: style)
+```
+
+Or, to create a black Card Component with white text:
+```swift
+var style = FormComponentStyle()
+style.backgroundColor = .black
+style.header.title.color = .white
+style.textField.title.color = .white
+style.textField.text.color = .white
+style.switch.title.color = .white
+
+let component = CardComponent(paymentMethod: paymentMethod,
+                              publicKey: Configuration.cardPublicKey,
+                              style: style)
+```
+
+A full list of customization options can be found in the [API Reference][reference.styles].
+
+## Requirements
+
+- iOS 10.0+
+- Xcode 11.0+
+- Swift 5
 
 ## See also
 
- * [Complete Documentation](https://docs.adyen.com/developers/checkout/ios)
+* [Complete Documentation](https://docs.adyen.com/developers/checkout/ios)
 
- * [SDK Reference](https://adyen.github.io/adyen-ios/Docs/index.html)
-
- * [Migration Notes](https://github.com/Adyen/adyen-ios/blob/master/MIGRATION.md)
-
+* [Components API Reference](https://adyen.github.io/adyen-ios/Docs/index.html)
 
 ## License
 
 This repository is open source and available under the MIT license. For more information, see the LICENSE file.
+
+[reference]: https://adyen.github.io/adyen-ios/Docs/index.html
+[reference.dropInComponent]: https://adyen.github.io/adyen-ios/Docs/Classes/DropInComponent.html
+[reference.cardComponent]: https://adyen.github.io/adyen-ios/Docs/Classes/CardComponent.html
+[reference.threeDS2Component]: https://adyen.github.io/adyen-ios/Docs/Classes/ThreeDS2Component.html
+[reference.applePayComponent]: https://adyen.github.io/adyen-ios/Docs/Classes/ApplePayComponent.html
+[reference.bcmcComponent]: https://adyen.github.io/adyen-ios/Docs/Classes/BCMCComponent.html
+[reference.issuerListComponent]: https://adyen.github.io/adyen-ios/Docs/Classes/IssuerListComponent.html
+[reference.weChatPaySDKActionComponent]: https://adyen.github.io/adyen-ios/Docs/Classes/WeChatPaySDKActionComponent.html
+[reference.qiwiWalletComponent]: https://adyen.github.io/adyen-ios/Docs/Classes/QiwiWalletComponent.html
+[reference.sepaDirectDebitComponent]: https://adyen.github.io/adyen-ios/Docs/Classes/SEPADirectDebitComponent.html
+[reference.redirectComponent]: https://adyen.github.io/adyen-ios/Docs/Classes/RedirectComponent.html
+[reference.styles]: https://adyen.github.io/adyen-ios/Docs/Styling.html
+[apiExplorer.paymentMethods]: https://docs.adyen.com/api-explorer/#/PaymentSetupAndVerificationService/v46/paymentMethods
+[apiExplorer.payments]: https://docs.adyen.com/api-explorer/#/PaymentSetupAndVerificationService/v46/payments
+[apiExplorer.paymentsDetails]: https://docs.adyen.com/api-explorer/#/PaymentSetupAndVerificationService/v46/paymentsDetails

@@ -13,8 +13,13 @@ Pod::Spec.new do |s|
   s.author = { 'Adyen' => 'support@adyen.com' }
   s.source = { :git => 'https://github.com/Adyen/adyen-ios.git', :tag => "#{s.version}" }
   s.platform = :ios
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '11.0'
   s.frameworks = 'Foundation'
+  s.resource_bundles = {
+      'Adyen' => [
+        'Adyen/CoreUI/Assets/Media.xcassets'
+      ]
+  }
 
   s.default_subspecs = 'Core', 'Cards', 'Ideal', 'SEPADirectDebit', 'UI'
 

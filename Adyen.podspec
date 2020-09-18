@@ -16,8 +16,9 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '11.0'
   s.frameworks = 'Foundation'
   s.resource_bundles = {
-      'Adyen' => [
-        'Adyen/CoreUI/Assets/Media.xcassets'
+      'Colors' => [
+        'Adyen/CoreUI/Assets/Media.xcassets',
+        'Adyen/Colors.xcassets',
       ]
   }
 

@@ -12,6 +12,7 @@
 		53C0FEFC4B5CD9400E89E4CA /* Pods_AdyenTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3BE1722DC859E029DDBCF09 /* Pods_AdyenTests.framework */; };
 		7C62EBEC1F3C793700C9D67E /* PaymentMethodExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C62EBEB1F3C793700C9D67E /* PaymentMethodExtensions.swift */; };
 		7D7AD12FB4E950056731EEB6 /* Pods_Adyen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7AEC312DF920BCC1C4BC1C0 /* Pods_Adyen.framework */; };
+		A317D1892514D4B5006873FE /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A317D1882514D4B5006873FE /* Colors.xcassets */; };
 		C3A02E02B25D9A9E913FA639 /* Pods_AdyenUIHost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36FCC0F6EB491A052CC61D81 /* Pods_AdyenUIHost.framework */; };
 		E20AD01A1EFAB0310065B70E /* Adyen.h in Headers */ = {isa = PBXBuildFile; fileRef = E20AD00C1EFAB0310065B70E /* Adyen.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E20AD06A1EFAB0E00065B70E /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20AD0251EFAB0E00065B70E /* CurrencyFormatter.swift */; };
@@ -188,6 +189,7 @@
 		7370242B72CA01D6FB771E34 /* Pods-AdyenTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdyenTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AdyenTests/Pods-AdyenTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7C62EBEB1F3C793700C9D67E /* PaymentMethodExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentMethodExtensions.swift; sourceTree = "<group>"; };
 		9D45EFB0559159A56AFB2ED0 /* Pods-AdyenUIHost.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdyenUIHost.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AdyenUIHost/Pods-AdyenUIHost.debug.xcconfig"; sourceTree = "<group>"; };
+		A317D1882514D4B5006873FE /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		B7AEC312DF920BCC1C4BC1C0 /* Pods_Adyen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adyen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3BE1722DC859E029DDBCF09 /* Pods_AdyenTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AdyenTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E20AD0091EFAB0310065B70E /* Adyen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Adyen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -411,6 +413,7 @@
 				E20AD0461EFAB0E00065B70E /* CoreUI */,
 				E20AD0621EFAB0E00065B70E /* UI */,
 				E20AD0501EFAB0E00065B70E /* Plugins */,
+				A317D1882514D4B5006873FE /* Colors.xcassets */,
 				E20AD00C1EFAB0310065B70E /* Adyen.h */,
 				E20AD00D1EFAB0310065B70E /* Info.plist */,
 			);
@@ -1000,6 +1003,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				nl,
 				fr,
@@ -1029,6 +1033,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E27DA5701F28D48C008487D5 /* Media.xcassets in Resources */,
+				A317D1892514D4B5006873FE /* Colors.xcassets in Resources */,
 				E27DA5711F28D48C008487D5 /* Localizable.strings in Resources */,
 				E25038461F17641700DCFD38 /* CardFormViewController.xib in Resources */,
 			);

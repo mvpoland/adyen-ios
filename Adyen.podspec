@@ -17,8 +17,7 @@ Pod::Spec.new do |s|
   s.frameworks = 'Foundation'
   s.resource_bundles = {
       'Colors' => [
-        'Adyen/CoreUI/Assets/Media.xcassets',
-        'Adyen/Colors.xcassets',
+        'Adyen/Colors.xcassets'
       ]
   }
 

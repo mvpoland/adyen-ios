@@ -16,8 +16,17 @@ protocol CheckoutPaymentFieldDelegate: class {
 class CardPaymentFieldManager: NSObject, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
 
     private enum Constants {
-        static let bundle = Bundle(identifier: "org.cocoapods.Adyen")
-        static let fieldTextColor = UIColor(named: "cardFieldsTextColor", in: bundle, compatibleWith: nil)
+        static let colorsBundleName = "Colors"
+        static let fieldTextColorName = "cardFieldsTextColor"
+    }
+
+    // MARK: - Dark Mode Improvements
+
+    private var cardFieldsColor: UIColor {
+        let podBundle = Bundle(for: CardPaymentFieldManager.self)
+        let url = podBundle.url(forResource: Constants.colorsBundleName, withExtension: "bundle")!
+        let colorsBundle = Bundle(url: url)
+        return UIColor(named: Constants.fieldTextColorName, in: colorsBundle, compatibleWith: nil)!
     }
     
     // MARK: - Object Lifecycle
@@ -42,7 +51,7 @@ class CardPaymentFieldManager: NSObject, UITextFieldDelegate, UIPickerViewDelega
     // MARK: - UITextFieldDelegate
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.textColor = Constants.fieldTextColor
+        textField.textColor = cardFieldsColor
         delegate?.paymentFieldDidUpdateActive(field: textField)
     }
     
@@ -61,7 +70,7 @@ class CardPaymentFieldManager: NSObject, UITextFieldDelegate, UIPickerViewDelega
             valid = CardValidator.validate(cvc: text).isValid || !isCvcRequired
         }
         
-        textField.textColor = valid ? validTextColor : invalidTextColor
+        textField.textColor = valid ? cardFieldsColor : incardFieldsColor
         if !valid {
             if #available(iOS 10.0, *) {
                 let generator = UINotificationFeedbackGenerator()
@@ -125,7 +134,7 @@ class CardPaymentFieldManager: NSObject, UITextFieldDelegate, UIPickerViewDelega
                     valid = true
                 }
                 cvcField.valid = valid
-                cvcField.textColor = valid ? validTextColor : invalidTextColor
+                cvcField.textColor = valid ? cardFieldsColor : incardFieldsColor
                 checkFieldValidity()
             }
         }
@@ -157,8 +166,7 @@ class CardPaymentFieldManager: NSObject, UITextFieldDelegate, UIPickerViewDelega
     private var expirationField: CardExpirationField
     private var cvcField: CardCvcField
     private var acceptedCards: [CardType]
-    private let validTextColor = Constants.fieldTextColor
-    private let invalidTextColor = UIColor.red
+    private let incardFieldsColor = UIColor.red
     private var installmentValues: [InputSelectItem] = []
     
     private var installmentTextField: CardInstallmentField? {

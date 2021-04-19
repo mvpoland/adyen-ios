@@ -40,7 +40,7 @@ open class FormViewController: UIViewController {
         navigationController?.navigationBar.isTranslucent = false
         
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: .UIKeyboardWillChangeFrame, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: .UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
     open override func viewWillAppear(_ animated: Bool) {
@@ -83,7 +83,7 @@ open class FormViewController: UIViewController {
     private var didAssignInitialFirstResponder = false
     
     @objc private func keyboardWillChangeFrame(_ notification: NSNotification) {
-        guard let bounds = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect else {
+        guard let bounds = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
             return
         }
         

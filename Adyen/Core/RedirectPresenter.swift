@@ -43,7 +43,7 @@ internal struct RedirectPresenter {
     static func open(url: URL, from presenter: UIViewController, safariDelegate: SFSafariViewControllerDelegate) {
         let urlIsAppUrl = RedirectPresenter.isAppURL(url)
         
-        let options: [String: Any] = urlIsAppUrl ? [:] : [UIApplicationOpenURLOptionUniversalLinksOnly: true]
+        let options: [UIApplication.OpenExternalURLOptionsKey: Any] = urlIsAppUrl ? [:] : [UIApplication.OpenExternalURLOptionsKey.universalLinksOnly: true]
         UIApplication.shared.open(url, options: options) { success in
             if !success {
                 if !urlIsAppUrl {

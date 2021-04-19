@@ -41,7 +41,7 @@ public struct Appearance {
     public var formAttributes = FormAttributes()
     
     /// Text attributes that are applied to all regular text labels.
-    public var textAttributes: [NSAttributedStringKey: Any] = [
+    public var textAttributes: [NSAttributedString.Key: Any] = [
         .foregroundColor: UIColor.black,
         .font: UIFont.systemFont(ofSize: 17)
     ]
@@ -57,7 +57,7 @@ extension Appearance {
         }
         
         /// The attributes used for the navigation bar's title.
-        public var titleAttributes: [NSAttributedStringKey: Any]?
+        public var titleAttributes: [NSAttributedString.Key: Any]?
         
         /// The navigation bar's tint color.
         public var tintColor: UIColor?
@@ -107,7 +107,7 @@ extension Appearance {
         public var title: String?
         
         /// The attributes used for the checkout button's title.
-        public var titleAttributes: [NSAttributedStringKey: Any] = [
+        public var titleAttributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.white,
             .font: UIFont.systemFont(ofSize: 17, weight: .bold)
         ]
@@ -160,7 +160,7 @@ extension Appearance {
         public var activityIndicatorColor: UIColor?
         
         /// The attributes used for a list's section titles.
-        public var sectionTitleAttributes: [NSAttributedStringKey: Any] = [
+        public var sectionTitleAttributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.black,
             .font: UIFont.systemFont(ofSize: 17, weight: .semibold)
         ]
@@ -177,19 +177,19 @@ extension Appearance {
         }
         
         /// The attributes used for a form's title.
-        public var titleAttributes: [NSAttributedStringKey: Any] = [
+        public var titleAttributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.black,
             .font: UIFont.systemFont(ofSize: 32, weight: .bold)
         ]
         
         /// The attributes used for a form's field titles.
-        public var fieldTitleAttributes: [NSAttributedStringKey: Any] = [
+        public var fieldTitleAttributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.black,
             .font: UIFont.systemFont(ofSize: 13, weight: .bold)
         ]
         
         /// The attributes used for a form's footer title.
-        public var footerTitleAttributes: [NSAttributedStringKey: Any] = [
+        public var footerTitleAttributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.lightGray,
             .font: UIFont.systemFont(ofSize: 13)
         ]
@@ -198,7 +198,7 @@ extension Appearance {
         public var invalidTextColor = UIColor.red
         
         /// The attributes used for a field's placeholder.
-        public var placeholderAttributes: [NSAttributedStringKey: Any]?
+        public var placeholderAttributes: [NSAttributedString.Key: Any]?
         
         /// The color of the separator inbetween a form's fields.
         public var separatorColor: UIColor = #colorLiteral(red: 0.8470588235, green: 0.8470588235, blue: 0.8470588235, alpha: 1)

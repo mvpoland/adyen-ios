@@ -28,7 +28,7 @@ internal final class ListItemView: UIView {
         }
     }
     
-    internal var titleAttributes: [NSAttributedStringKey: Any]? {
+    internal var titleAttributes: [NSAttributedString.Key: Any]? {
         didSet {
             updateTitle()
         }

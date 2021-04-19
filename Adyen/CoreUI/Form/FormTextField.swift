@@ -133,7 +133,7 @@ internal extension FormTextField {
         }
         
         set {
-            let attributes: [NSAttributedStringKey: Any] = [
+            let attributes: [NSAttributedString.Key: Any] = [
                 .font: UIFont.systemFont(ofSize: 18.0),
                 .foregroundColor: UIColor.black
             ]
@@ -147,7 +147,7 @@ internal extension FormTextField {
         }
         
         set {
-            let attributes: [NSAttributedStringKey: Any] = [
+            let attributes: [NSAttributedString.Key: Any] = [
                 .font: UIFont.systemFont(ofSize: 18.0),
                 .foregroundColor: #colorLiteral(red: 0.7450980392, green: 0.7450980392, blue: 0.7450980392, alpha: 1)
             ]

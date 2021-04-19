@@ -4,6 +4,8 @@
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
+// swiftlint:disable all
+
 /// Error type.
 public enum Error: Swift.Error {
     

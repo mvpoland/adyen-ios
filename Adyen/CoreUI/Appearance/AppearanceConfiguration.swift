@@ -25,10 +25,10 @@ public final class AppearanceConfiguration {
     // MARK: - Configuring the Navigation Bar Title Text Appearance
     
     /// The attributes used for the navigation bar's title.
-    public var navigationBarTitleTextAttributes: [NSAttributedStringKey: Any]?
+    public var navigationBarTitleTextAttributes: [NSAttributedString.Key: Any]?
     
     /// The attributes used for the navigation bar's large title. Only has an effect on iOS 11 and higher.
-    public var navigationBarLargeTitleTextAttributes: [NSAttributedStringKey: Any]?
+    public var navigationBarLargeTitleTextAttributes: [NSAttributedString.Key: Any]?
     
     /// Display modes for the large title in a navigation bar.
     public enum NavigationBarLargeTitleDisplayMode {
@@ -114,7 +114,7 @@ public final class AppearanceConfiguration {
     
     // MARK: - Internal
     
-    internal var internalCheckoutButtonTitleTextAttributes: [NSAttributedStringKey: Any]? // swiftlint:disable:this identifier_name
+    internal var internalCheckoutButtonTitleTextAttributes: [NSAttributedString.Key: Any]? // swiftlint:disable:this identifier_name
     
     internal var internalCheckoutButtonTitleEdgeInsets: UIEdgeInsets?
     
@@ -164,7 +164,7 @@ public extension AppearanceConfiguration {
     
     /// The attributes used for the checkout button's title. Only used when `checkoutButtonType` is the default.
     @available(*, deprecated, message: "Provide a custom button via checkoutButtonType instead.")
-    public var checkoutButtonTitleTextAttributes: [NSAttributedStringKey: Any]? {
+    public var checkoutButtonTitleTextAttributes: [NSAttributedString.Key: Any]? {
         get {
             return internalCheckoutButtonTitleTextAttributes
         }

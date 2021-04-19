@@ -8,7 +8,7 @@ import UIKit
 
 internal final class PickerViewCell: UITableViewCell {
     
-    internal override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    internal override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         contentView.addSubview(customImageView)
@@ -107,6 +107,6 @@ internal final class PickerViewCell: UITableViewCell {
         }
     }
     
-    private lazy var activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    private lazy var activityIndicatorView = UIActivityIndicatorView(style: .gray)
     
 }

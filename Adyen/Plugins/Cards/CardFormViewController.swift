@@ -149,7 +149,7 @@ class CardFormViewController: UIViewController, CheckoutPaymentFieldDelegate {
         if cardScanButtonHandler == nil {
             cardNumberWidthConstraint.constant = 0
         }
-        cardNumberScanButton.setImage(UIImage.bundleImage("camera_icon"), for: UIControlState())
+        cardNumberScanButton.setImage(UIImage.bundleImage("camera_icon"), for: UIControl.State())
         
         cardNumberLogoImageView.image = UIImage.bundleImage("credit_card_icon")
         storeDetailsButton.setImage(UIImage.bundleImage("checkbox_inactive"), for: .normal)
@@ -204,8 +204,8 @@ class CardFormViewController: UIViewController, CheckoutPaymentFieldDelegate {
     }
     
     private func setupKeyboard() {
-        _ = NotificationCenter.default.addObserver(forName: .UIKeyboardWillShow, object: nil, queue: OperationQueue.main) { notification in
-            if let bounds = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect {
+        _ = NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: OperationQueue.main) { notification in
+            if let bounds = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
                 var inset = self.scrollView.contentInset
                 inset.bottom = bounds.size.height
                 self.scrollView.contentInset = inset

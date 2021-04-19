@@ -10,7 +10,7 @@ class PaymentMethodTableViewCell: LoadingTableViewCell {
     
     // MARK: - Initializing
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         commonInit()
@@ -101,8 +101,8 @@ class PaymentMethodTableViewCell: LoadingTableViewCell {
     private func commonInit() {
         contentView.addSubview(logoView)
         contentView.addSubview(nameLabel)
-        
-        accessibilityTraits |= UIAccessibilityTraitButton
+
+        accessibilityTraits.insert(.button)
         
         configureConstraints()
     }

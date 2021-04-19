@@ -169,7 +169,7 @@ public final class CheckoutViewController: UIViewController, PaymentRequestDeleg
             
             if #available(iOS 10.0, *) {
                 // Try to open the URL as a universal link.
-                UIApplication.shared.open(url, options: [UIApplicationOpenURLOptionUniversalLinksOnly: true]) { [weak self] success in
+                UIApplication.shared.open(url, options: [UIApplication.OpenExternalURLOptionsKey.universalLinksOnly: true]) { [weak self] success in
                     // If opening the URL as a universal link was not possible, open it as a website instead.
                     if !success {
                         self?.presentWebPage(with: url)
@@ -283,14 +283,14 @@ public final class CheckoutViewController: UIViewController, PaymentRequestDeleg
     
     private var rootViewController: UIViewController? {
         willSet {
-            rootViewController?.removeFromParentViewController()
+            rootViewController?.removeFromParent()
             rootViewController?.viewIfLoaded?.removeFromSuperview()
         }
         
         didSet {
             guard let rootViewController = rootViewController else { return }
             
-            addChildViewController(rootViewController)
+            addChild(rootViewController)
             viewIfLoaded?.addSubview(rootViewController.view)
         }
     }

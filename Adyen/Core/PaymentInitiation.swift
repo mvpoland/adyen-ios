@@ -4,6 +4,8 @@
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
+// swiftlint:disable all
+
 import Foundation
 
 /// Contains all the data returned from the server when initiating a payment.

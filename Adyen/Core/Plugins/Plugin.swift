@@ -7,7 +7,7 @@
 import Foundation
 
 /// Instances of conforming types provide additional logic for a payment method, such as an interface to enter payment details.
-internal protocol Plugin {
+protocol Plugin {
     
     /// The configuration of the plugin.
     var configuration: PluginConfiguration { get }
@@ -19,7 +19,7 @@ internal protocol Plugin {
     
 }
 
-internal protocol PluginRequiresFinalState: Plugin {
+protocol PluginRequiresFinalState: Plugin {
     
     /// Provides an opportunity for a plugin to execute asynchronous logic based on the result of a completed payment.
     ///
@@ -30,14 +30,14 @@ internal protocol PluginRequiresFinalState: Plugin {
     
 }
 
-internal protocol DeviceDependablePlugin: Plugin {
+protocol DeviceDependablePlugin: Plugin {
     
     /// Boolean value indicating whether the current device is supported.
     var isDeviceSupported: Bool { get }
     
 }
 
-internal protocol CardScanPlugin: Plugin {
+protocol CardScanPlugin: Plugin {
     
     /// Handler for card scan button.
     var cardScanButtonHandler: ((@escaping CardScanCompletion) -> Void)? { get set }
@@ -45,12 +45,12 @@ internal protocol CardScanPlugin: Plugin {
 }
 
 /// Structure containing the configuration of a plugin.
-internal struct PluginConfiguration {
+struct PluginConfiguration {
     
     /// The payment method for which the plugin is used.
-    internal let paymentMethod: PaymentMethod
+    let paymentMethod: PaymentMethod
     
     /// The payment setup.
-    internal let paymentSetup: PaymentSetup
+    let paymentSetup: PaymentSetup
     
 }

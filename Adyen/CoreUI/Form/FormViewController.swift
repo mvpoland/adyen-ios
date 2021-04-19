@@ -19,7 +19,7 @@ internal class FormViewController: ContainerViewController {
         contentView = formView
         
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: .UIKeyboardWillChangeFrame, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,7 +50,7 @@ internal class FormViewController: ContainerViewController {
     // MARK: - Keyboard
     
     @objc private func keyboardWillChangeFrame(_ notification: NSNotification) {
-        guard let bounds = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect else {
+        guard let bounds = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
             return
         }
         

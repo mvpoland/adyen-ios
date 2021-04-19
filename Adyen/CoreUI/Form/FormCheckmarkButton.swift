@@ -18,7 +18,7 @@ internal class FormCheckmarkButton: UIControl {
         configureConstraints()
         
         isAccessibilityElement = true
-        accessibilityTraits = UIAccessibilityTraitButton
+        accessibilityTraits = UIAccessibilityTraits.button
     }
     
     required init(coder: NSCoder) {
@@ -91,9 +91,9 @@ internal class FormCheckmarkButton: UIControl {
             imageView.image = isSelected ? selectedImage : image
             
             if isSelected {
-                accessibilityTraits = UIAccessibilityTraitButton | UIAccessibilityTraitSelected
+                accessibilityTraits = UIAccessibilityTraits(rawValue: UIAccessibilityTraits.button.rawValue | UIAccessibilityTraits.selected.rawValue)
             } else {
-                accessibilityTraits = UIAccessibilityTraitButton
+                accessibilityTraits = UIAccessibilityTraits.button
             }
         }
     }

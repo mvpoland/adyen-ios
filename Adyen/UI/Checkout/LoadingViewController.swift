@@ -21,7 +21,7 @@ final class LoadingViewController: UIViewController {
     }
 
     override func viewDidLoad() {
-        let activity = UIActivityIndicatorView(activityIndicatorStyle: .white)
+        let activity = UIActivityIndicatorView(style: .white)
         navigationItem.titleView = activity
         activity.startAnimating()
     }

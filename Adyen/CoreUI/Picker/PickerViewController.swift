@@ -116,7 +116,7 @@ internal final class PickerViewController: UITableViewController {
 }
 
 /// The delegate of the picker view controller, receives a message when an item is selected.
-internal protocol PickerViewControllerDelegate: AnyObject {
+protocol PickerViewControllerDelegate: AnyObject {
     
     /// Invoked by the picker view controller when an item is selected.
     ///

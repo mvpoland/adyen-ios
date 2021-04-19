@@ -189,7 +189,7 @@ extension PaymentMethodPickerViewController {
     }
     
     /// :nodoc:
-    public override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    public override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             //  Deletion is allowed only for preferred methods (section == 0).
             if indexPath.section != 0 {
